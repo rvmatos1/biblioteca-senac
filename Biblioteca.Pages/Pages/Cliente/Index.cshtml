@@ -1,0 +1,59 @@
+@page
+@model Biblioteca.Pages.Pages.Cliente.Index
+@if(TempData["Mensagem"] != null)
+{
+   <div class="alert alert-success">@TempData["Mensagem"]</div>
+}
+<link rel="stylesheet" href="~/lib/css/estilo.css"/>
+<h1>Clientes</h1>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<div >
+    <table class="table table-bordered table-sm table-hover-custom">
+        <thead>
+            <tr>
+                <td scope="col">ID Cliente</td>
+                <td scope="col">Nome</td>
+                <td scope="col">Email</td>
+                <td scope="col">Telefone</td>
+                <td scope="col">CPF</td>
+                <td scope="col"></td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var clienteModel in Model.ClienteList)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(model => clienteModel.ClienteID)</td>
+                    <td>@Html.DisplayFor(model => clienteModel.Nome)</td>
+                    <td>@Html.DisplayFor(model => clienteModel.Email)</td>
+                    <td>@Html.DisplayFor(model => clienteModel.Telefone)</td>
+                    <td>@Html.DisplayFor(model => clienteModel.Cpf)</td>
+                    <td>
+                        <a class="btn btn-sm btn-secondary active" asp-page="./Edit" asp-route-id="@clienteModel.ClienteID"> <i class="fa fa-pencil"></i></a>
+                        <a class="btn btn-sm btn-success active" asp-page="./Details" asp-route-id="@clienteModel.ClienteID"> <i class="fa fa-eye"></i> </a>
+                        <a class="btn btn-secondary btn-sm btn-danger" asp-page="./Delete" asp-route-id="@clienteModel.ClienteID"> <i class="fa fa-trash"></i> </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+<p style="text-align:center"><a class="btn btn-primary" role="button" asp-page="./Create"> <strong>Novo Cliente</strong></a></p>
+</div>
+
+<style>
+    main{
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .info{
+        width: 60vw;
+        text-align: center;
+        background-color: rgb(255, 255, 255);
+        padding: 10px;
+        border-radius: 5px;
+    }
+</style>
