@@ -1,0 +1,34 @@
+@page "{id:int}"
+@model Biblioteca.Pages.Pages.Emprestimo.Details
+<link rel="stylesheet" href="~/lib/css/estilo.css"/>
+<h1>Detalhes do Emprestimo: </h1>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<div class="info">
+    <p><strong>Data do Empréstimo:</strong> @Convert.ToDateTime(Model.EmprestimoModel.DataEmprestimo).ToString("dd/MM/yyyy") </p>
+    <p><strong>Data de Devolução Prevista:</strong> @Convert.ToDateTime(Model.EmprestimoModel.DataDevolucaoPrevista).ToString("dd/MM/yyyy") </p>
+    <p><strong>Bibliotecário:</strong> @Model.EmprestimoModel.Bibliotecario!.Nome</p>
+    <p><strong>Autor do Livro:</strong> @Model.EmprestimoModel.Livro!.Autor </p>
+    <p><strong>Nome do Usuário:</strong> @Model.EmprestimoModel.NomeUsuario </p>
+</div>
+
+<p style="text-align:center"><a class="btn btn-primary" role="button" asp-page="Index"> <strong>Voltar</strong></a></p>
+
+<style>
+
+    main{
+        
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .info{
+        width: 60vw;
+        text-align: left;
+        background-color: rgb(201, 201, 201);
+        padding: 10px;
+        border-radius: 5px;
+    }

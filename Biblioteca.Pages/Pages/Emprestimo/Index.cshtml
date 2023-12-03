@@ -1,0 +1,61 @@
+@page
+@model Biblioteca.Pages.Pages.Emprestimo.Index
+@if(TempData["Mensagem"] != null)
+{
+   <div class="alert alert-success">@TempData["Mensagem"]</div>
+}
+<link rel="stylesheet" href="~/lib/css/estilo.css"/>
+<h1>Empréstimos</h1>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<div >
+    <table class="table table-bordered table-sm table-hover-custom">
+        <thead>
+            <tr>
+                <td scope="col">ID Empréstimo</td>
+                <td scope="col">Bibliotecário</td>
+                <td scope="col">Livro</td>
+                <td scope="col">Nome do Usuário</td>
+                <td scope="col" data-type="date" data-format-string="DD/MMMM/YYYY">Data de Emprestimo</td>
+                <td scope="col">Data de Devolução</td>
+                <td scope="col"></td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var emprestimoModel in Model.EmprestimoList)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(model => emprestimoModel.BibliotecarioID)</td>
+                    <td>@Html.DisplayFor(model => emprestimoModel.Bibliotecario!.Nome)</td>
+                    <td>@Html.DisplayFor(model => emprestimoModel.Livro!.ISBN)</td>   
+                    <td>@Html.DisplayFor(model => emprestimoModel.NomeUsuario)</td>
+                    <td>@Convert.ToDateTime(emprestimoModel.DataEmprestimo).ToString("dd/MM/yyyy")</td>
+                    <td>@Convert.ToDateTime(emprestimoModel.DataDevolucaoPrevista).ToString("dd/MM/yyyy")</td>
+                    <td>
+                        <a class="btn btn-sm btn-secondary active" asp-page="./Edit" asp-route-id="@emprestimoModel.EmprestimoID"> <i class="fa fa-pencil"></i></a>
+                        <a class="btn btn-sm btn-success active" asp-page="./Details" asp-route-id="@emprestimoModel.EmprestimoID"> <i class="fa fa-eye"></i> </a>
+                        <a class="btn btn-secondary btn-sm btn-danger" asp-page="./Delete" asp-route-id="@emprestimoModel.EmprestimoID"> <i class="fa fa-trash"></i> </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+<p style="text-align:center"><a class="btn btn-primary" role="button" asp-page="./Create"> <strong>Novo Empréstimo</strong></a></p>
+</div>
+
+<style>
+    main{
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .info{
+        width: 60vw;
+        text-align: center;
+        background-color: rgb(255, 255, 255);
+        padding: 10px;
+        border-radius: 5px;
+    }
+</style>

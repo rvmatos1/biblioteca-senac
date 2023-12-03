@@ -1,0 +1,17 @@
+@page "{id:int}"
+@model Biblioteca.Pages.Pages.Bibliotecario.Delete
+<link rel="stylesheet" href="~/lib/css/estilo.css"/>
+<div>
+    <h1>Deseja realmente remover?</h1>
+
+    <p><strong>Nome:</strong> @Model.BibliotecarioModel.Nome </p>
+    <p><strong>Email:</strong> @Model.BibliotecarioModel.Email </p>
+    <p><strong>Telefone:</strong> @Model.BibliotecarioModel.Telefone </p>
+</div>
+
+<form method="post">
+    <div class="form-group">
+        <input type="submit" value="Sim" class="btn btn-danger"/>
+        <a asp-page="/Bibliotecario/Index" class="btn btn-primary"> Voltar</a>
+    </div>
+</form>

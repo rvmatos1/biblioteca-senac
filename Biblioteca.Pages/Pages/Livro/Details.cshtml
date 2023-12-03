@@ -1,0 +1,35 @@
+@page "{id:int}"
+@model Biblioteca.Pages.Pages.Livro.Details
+<link rel="stylesheet" href="~/lib/css/estilo.css"/>
+<h1>Detalhes do Livro:</h1>
+
+<div class="info">
+    <p><strong>Título do Livro: </strong> @Model.LivroModel.TituloLivro </p>
+    <p><strong>Autor: </strong> @Model.LivroModel.Autor </p>
+    <p><strong>ISBN: </strong> @Model.LivroModel.ISBN </p>
+    <p><strong>Ano de Publicação: </strong> @Model.LivroModel.AnoPublicacao </p>
+    <p><strong>Quantidade Disponível: </strong> @Model.LivroModel.QuantidadeDisponivel </p>
+</div>
+
+<p style="text-align:center"><a class="btn btn-primary" role="button" asp-page="Index"> <strong>Voltar</strong></a></p>
+
+<style>
+
+    main{
+        
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .info{
+        width: 60vw;
+        text-align: left;
+        background-color: rgb(201, 201, 201);
+        padding: 10px;
+        border-radius: 5px;
+    }
+
+</style>

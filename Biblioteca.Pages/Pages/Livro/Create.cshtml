@@ -1,0 +1,50 @@
+@page
+@model Biblioteca.Pages.Pages.Livro.Create
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
+<link rel="stylesheet" href="~/lib/css/estilo.css"/>
+<h1>Cadastrar Dados do Livro</h1>
+
+<hr/>
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-dange"></div>
+            <input type="hidden" asp-for="LivroModel.LivroID"/>
+            <div class="form-group">
+                <label>Título do Livro</label>
+                <input asp-for="LivroModel.TituloLivro" class="form-control"/>
+                <span asp-validation-for="LivroModel.TituloLivro" class="text-dange"></span>
+            </div>
+            <br/>
+            <div class="form-group">
+                <label asp-for="LivroModel.Autor"></label>
+                <input asp-for="LivroModel.Autor" class="form-control"/>
+                <span asp-validation-for="LivroModel.Autor" class="text-dange"></span>
+            </div>
+            <br/>
+            <div class="form-group">
+                <label asp-for="LivroModel.ISBN"></label>
+                <input asp-for="LivroModel.ISBN" class="form-control"></textarea>
+                <span asp-validation-for="LivroModel.ISBN" class="text-dange"></span>
+            </div>
+            <br/>
+            <div class="form-group">
+                <label asp-for="LivroModel.AnoPublicacao"></label>
+                <input asp-for="LivroModel.AnoPublicacao" class="form-control" maxlength="4"/>
+                <span asp-validation-for="LivroModel.AnoPublicacao" class="text-dange"></span>
+            </div>
+            <br/>
+            <div class="form-group">
+                <label asp-for="LivroModel.QuantidadeDisponivel"></label>
+                <input asp-for="LivroModel.QuantidadeDisponivel" class="form-control" maxlength="15"/>
+                <span asp-validation-for="LivroModel.QuantidadeDisponivel" class="text-dange"></span>
+            </div>
+            <br/>
+            <div class="form-group">
+                <input type="submit" class="btn btn-primary" value="Salvar"/>
+                <a asp-page="/Livro/Index" class="btn btn-secondary"> Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,19 @@
+@page "{id:int}"
+@model Biblioteca.Pages.Pages.Emprestimo.Delete
+<link rel="stylesheet" href="~/lib/css/estilo.css"/>
+<div>
+    <h1>Deseja realmente remover?</h1>
+
+   <p><strong>Data do Empréstimo:</strong> @Convert.ToDateTime(Model.EmprestimoModel.DataEmprestimo).ToString("dd/MM/yyyy") </p>
+    <p><strong>Data de Devolução Prevista:</strong> @Convert.ToDateTime(Model.EmprestimoModel.DataDevolucaoPrevista).ToString("dd/MM/yyyy") </p>
+    <p><strong>Bibliotecário:</strong> @Model.EmprestimoModel.Bibliotecario!.Nome </p>
+    <p><strong>Autor do Livro:</strong> @Model.EmprestimoModel.Livro!.Autor </p>
+    <p><strong>Nome do Usuário:</strong> @Model.EmprestimoModel.NomeUsuario </p>
+</div>
+
+<form method="post">
+    <div class="form-group">
+        <input type="submit" value="Sim" class="btn btn-danger"/>
+        <a asp-page="/Emprestimo/Index" class="btn btn-primary"> Voltar</a>
+    </div>
+</form>

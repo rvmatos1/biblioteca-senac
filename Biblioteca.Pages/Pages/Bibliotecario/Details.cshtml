@@ -1,0 +1,34 @@
+@page "{id:int}"
+@model Biblioteca.Pages.Pages.Bibliotecario.Details
+<link rel="stylesheet" href="~/lib/css/estilo.css"/>
+<h1>Detalhes do Bibliotecario: @Model.BibliotecarioModel.Nome</h1>
+
+<div class="info">
+    <p><strong>Nome: </strong> @Model.BibliotecarioModel.Nome </p>
+    <p><strong>Sobrenome: </strong> @Model.BibliotecarioModel.Email </p>
+    @* <p><strong>CPF: </strong> @Model.BibliotecarioModel.Telefone </p> *@
+    <p><strong>Telefone: </strong> @Model.BibliotecarioModel.Telefone </p>
+</div>
+
+<p style="text-align:center"><a class="btn btn-primary" role="button" asp-page="Index"> <strong>Voltar</strong></a></p>
+
+<style>
+
+    main{
+        
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .info{
+        width: 60vw;
+        text-align: left;
+        background-color: rgb(201, 201, 201);
+        padding: 10px;
+        border-radius: 5px;
+    }
+
+</style>

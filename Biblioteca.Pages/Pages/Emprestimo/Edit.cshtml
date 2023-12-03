@@ -1,0 +1,56 @@
+@page
+@model Biblioteca.Pages.Pages.Emprestimo.Edit
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
+<link rel="stylesheet" href="~/lib/css/estilo.css"/>
+<h1>Alterar Dados do Emprestimo</h1>
+
+<hr/>
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            @* <div asp-validation-summary="ModelOnly" class="text-dange"></div> *@
+            <input type="hidden" asp-for="EmprestimoModel.EmprestimoID"/>
+            <div class="form-group">
+                <label>Data do Empréstimo</label>
+                <input asp-for="EmprestimoModel.DataEmprestimo" type = "date" class="form-control"/>
+                <span asp-validation-for="EmprestimoModel.DataEmprestimo" class="text-dange"></span>
+            </div>
+            <br/>
+            <div class="form-group">
+                <label>Data Prevista para Devolução</label>
+                <input asp-for="EmprestimoModel.DataDevolucaoPrevista" type="date" class="form-control"></textarea>
+                <span asp-validation-for="EmprestimoModel.DataDevolucaoPrevista" class="text-dange"></span>
+            </div>
+            <br/>
+            <label >Nome do Bibliotecário</label></br>
+            <select class="form-control" asp-for="EmprestimoModel.BibliotecarioID">
+            <option value="">Selecione um Bibliotecário</option>
+            @foreach (var bibliotecarioModel in Model.BibliotecarioList)
+            {
+                <option value="@bibliotecarioModel.BibliotecarioID">@bibliotecarioModel.Nome</option>
+            }
+            </select>
+            </br>
+            <label asp-for="EmprestimoModel.LivroID">Título do Livro</label></br>
+            <select class="form-control" asp-for="EmprestimoModel.LivroID">
+            <option value="">Selecione um Livro</option>
+            @foreach (var livroModel in Model.LivroList)
+            {
+                <option value="@livroModel.LivroID">@livroModel.TituloLivro</option>
+            }
+            </select>
+            </br>
+            <div class="form-group">
+                <label>Nome do Usuário</label>
+                <input asp-for="EmprestimoModel.NomeUsuario" class="form-control" maxlength="15"/>
+                <span asp-validation-for="EmprestimoModel.NomeUsuario" class="text-dange"></span>
+            </div>
+            <br/>
+            <div class="form-group">
+                <input type="submit" class="btn btn-primary" value="Salvar"/>
+                <a asp-page="/Emprestimo/Index" class="btn btn-secondary"> Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>

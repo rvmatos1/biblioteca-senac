@@ -1,0 +1,164 @@
+.row{
+    display: flex;
+}
+           
+h1{
+    text-align: center;
+    padding-top: 30px;
+    font-size: 30px;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+h3{
+    text-align: center;
+    padding-top: 30px;
+    font-size: 30px;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; 
+}
+
+.home{
+    background-color: rgb(166, 46, 46);
+    text-align: center;
+    flex: 1 1;
+    padding: 30px 30px 30px 30px;
+}
+
+header{
+    background-color: rgb(207, 227, 250);
+    padding-top: 12px;
+    padding-bottom: 12px;
+    padding-left: 2px;
+}
+
+.form{
+    text-align: center;
+}
+
+form{
+    width: 500px;
+    align-items: center;
+}
+
+.form-control{
+    text-align: left;      
+}
+
+.form-group{
+    text-align: left;
+    background-color: rgb(255, 255, 255);
+}
+
+.botao{
+    text-align: center;
+}
+
+select{
+    width: 500px;
+    text-align: left;
+}
+
+.info{
+    width: 900px;
+    background-color: rgb(255, 255, 255);
+    padding: 10px;
+    border-radius: 5px;
+    margin: 30px;
+}
+
+main{
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    background-color: rgb(255, 255, 255);
+    padding-bottom: 96px;
+}
+
+
+tbody tr td:last-child{
+    width: 10vw;
+}
+
+tbody tr td:not(:nth-child(4)){
+    text-align: center;
+}
+
+.img-livro {
+    padding-top: 40px;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: rgb(255, 255, 255);
+    color: #1b1a1a;
+    text-align: center;
+    padding: 0px;
+  }
+
+.nav-item{
+    text-align: left;
+    justify-content: center;
+    background-color: rgb(207, 227, 250);
+    color: white;
+    border-radius: 5px;
+}
+
+.nav-item:hover{
+    background-color: rgb(194, 218, 248);
+    color: rgb(255, 255, 255);
+    border-radius: 5px;
+}
+
+
+.btn-primary{
+    background-color: rgb(60, 186, 171);
+    border-color: white;
+
+}
+
+.btn-primary:hover{
+    background-color:rgb(62, 131, 124)    ;
+    border-color: rgb(72, 145, 137);
+}
+
+.btn-secondary{
+    background-color: rgb(249, 136, 128);
+    border-color: white;
+}
+
+.btn-secondary:hover{
+    background-color: rgb(253, 96, 85);
+    border-color: white;
+}
+
+.btn-terc{
+    background-color: rgb(163, 162, 162);
+    color: white;
+}
+
+.btn-terc:hover{
+    background-color: rgb(93, 93, 93);
+    color: white;
+}
+
+.btn-danger{
+    background-color: rgb(252, 124, 115);
+    border-color: white;
+}
+
+.btn-danger:hover{
+    background-color: rgb(253, 96, 85);
+    border-color: white;
+}
+
+.table-hover-custom{
+    background-color: rgb(247, 249, 251);
+}
+
+.table{
+    border-color:rgb(255, 255, 255) ;
+}
+
