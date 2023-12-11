@@ -22,6 +22,8 @@ namespace Biblioteca.Pages.Models
         public int AnoPublicacao { get; set; }
 
         [Required(ErrorMessage = "Quantidade disponível é obrigatória!")]
-        public int QuantidadeDisponivel { get; set; } 
+        public int QuantidadeDisponivel { get; set; }
+
+        public bool Ativo { get; set; }
     }
 }

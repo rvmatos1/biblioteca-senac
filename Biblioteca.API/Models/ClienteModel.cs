@@ -20,5 +20,7 @@ namespace Biblioteca.API.Models
 
         [Required(ErrorMessage = "CPF é obrigatório!")]
         public string? Cpf { get; set; }
+
+        public bool Ativo { get; set; }
     }
 }

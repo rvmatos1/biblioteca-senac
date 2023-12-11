@@ -20,5 +20,7 @@ namespace Biblioteca.API.Models
 
         [Required(ErrorMessage ="Telefone é obrigatório!")]
         public string? Telefone { get; set; }
+
+        public bool Ativo { get; set; }
     }
 }
