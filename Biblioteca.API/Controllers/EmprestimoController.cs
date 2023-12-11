@@ -54,19 +54,18 @@ namespace Biblioteca.API.Controllers
         public IActionResult Post([FromBody] EmprestimoModel emprestimoModel,
             [FromServices] AppDbContext context)
         {
-            if(emprestimoModel?.Livro?.QuantidadeDisponivel > 0)
-            {
-                emprestimoModel.Ativo = true;
-                emprestimoModel.Livro.QuantidadeDisponivel--;
-                context.Livro!.Update(emprestimoModel.Livro);
+            var livro = context.Livro!.FirstOrDefault(x => x.LivroID == emprestimoModel.LivroID);
 
-                context.Emprestimo!.Add(emprestimoModel);
-                context.SaveChanges();
-            }
-            else
+            if (livro == null || livro?.QuantidadeDisponivel <= 0)
             {
-                return BadRequest("Livro não disponível para empréstimo!");
+                return NotFound("Livro não encontrado no acervo ou não disponível para empréstimo!");
             }
+            livro.QuantidadeDisponivel--;
+            context.Livro!.Update(livro);
+
+            emprestimoModel.Ativo = true;
+            context.Emprestimo!.Add(emprestimoModel);
+            context.SaveChanges();
             
             return Created($"/{emprestimoModel.EmprestimoID}", emprestimoModel);
         }
