@@ -12,7 +12,7 @@ namespace Biblioteca.API.Controllers
         [HttpGet]
         [Route("/Emprestimo")]
         public IActionResult Get([FromServices] AppDbContext context){
-            var emprestimos = context.Emprestimo!.Where(x => x.Ativo).Include(b => b.Bibliotecario).Include(l => l.Livro).ToList();
+            var emprestimos = context.Emprestimo!.Where(x => x.Ativo).Include(b => b.Bibliotecario).Include(c => c.Cliente).Include(l => l.Livro).ToList();
             return Ok(emprestimos);
         }
 
@@ -53,8 +53,7 @@ namespace Biblioteca.API.Controllers
                     Email = emprestimoModel.Cliente.Email,
                     Telefone = emprestimoModel.Cliente.Telefone,
                     Cpf = emprestimoModel.Cliente.Cpf
-                }
-                
+                }                
             });
         }
 

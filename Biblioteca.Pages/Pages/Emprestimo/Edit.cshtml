@@ -23,33 +23,6 @@
                 <span asp-validation-for="EmprestimoModel.DataDevolucaoPrevista" class="text-dange"></span>
             </div>
             <br/>
-            <label >Nome do Bibliotecário</label></br>
-            <select class="form-control" asp-for="EmprestimoModel.BibliotecarioID">
-            <option value="">Selecione um Bibliotecário</option>
-            @foreach (var bibliotecarioModel in Model.BibliotecarioList)
-            {
-                <option value="@bibliotecarioModel.BibliotecarioID">@bibliotecarioModel.Nome</option>
-            }
-            </select>
-            </br>
-            <label asp-for="EmprestimoModel.LivroID">Título do Livro</label></br>
-            <select class="form-control" asp-for="EmprestimoModel.LivroID">
-            <option value="">Selecione um Livro</option>
-            @foreach (var livroModel in Model.LivroList)
-            {
-                <option value="@livroModel.LivroID">@livroModel.TituloLivro</option>
-            }
-            </select>
-            </br>
-            <label asp-for="EmprestimoModel.ClienteID">Nome do Cliente</label></br>
-            <select class="form-control" asp-for="EmprestimoModel.ClienteID">
-            <option value="">Selecione o Cliente</option>
-            @foreach (var livroModel in Model.ClienteList)
-            {
-                <option value="@livroModel.ClienteID">@livroModel.Nome</option>
-            }
-            </select>
-            </br>
             <br/>
             <div class="form-group">
                 <input type="submit" class="btn btn-primary" value="Salvar"/>

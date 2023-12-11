@@ -22,6 +22,7 @@ namespace Biblioteca.Pages.Models
         public int AnoPublicacao { get; set; }
 
         [Required(ErrorMessage = "Quantidade disponível é obrigatória!")]
+        [Range(1, int.MaxValue, ErrorMessage = "O valor deve ser maior que 0.")]
         public int QuantidadeDisponivel { get; set; }
 
         public bool Ativo { get; set; }
