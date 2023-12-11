@@ -39,12 +39,15 @@
                 <option value="@livroModel.LivroID">@livroModel.TituloLivro</option>
             }
             </select>
-
-            <div class="form-group">
-                <label>Nome do Usuário</label>
-                <input asp-for="EmprestimoModel.NomeUsuario" class="form-control" maxlength="15"/>
-                <span asp-validation-for="EmprestimoModel.NomeUsuario" class="text-dange"></span>
-            </div>
+            <label>Nome do Cliente</label></br>
+            <select class="form-control" asp-for="EmprestimoModel.ClienteID">
+                <option value="">Selecione um Cliente</option>
+                @foreach (var clienteModel in Model.ClienteList)
+                {
+                    <option value="@clienteModel.ClienteID">@clienteModel.Nome</option>
+                }
+            </select>
+            
             <br/>
             <div class="form-group">
                 <input type="submit" class="btn btn-primary" value="Salvar"/>

@@ -19,7 +19,7 @@ namespace Biblioteca.API.Controllers
         [HttpGet("/Emprestimo/Details/{id:int}")]
         public IActionResult GetById([FromRoute] int id, [FromServices] AppDbContext context)
         {
-            var emprestimoModel = context.Emprestimo!.Include(b => b.Bibliotecario).Include(l => l.Livro).FirstOrDefault(x => x.EmprestimoID == id);
+            var emprestimoModel = context.Emprestimo!.Include(b => b.Bibliotecario).Include(l => l.Livro).Include(c => c.Cliente).FirstOrDefault(x => x.EmprestimoID == id);
             if (emprestimoModel == null)
             {
                 return NotFound();
@@ -46,7 +46,15 @@ namespace Biblioteca.API.Controllers
                     AnoPublicacao = emprestimoModel.Livro.AnoPublicacao,
                     QuantidadeDisponivel = emprestimoModel.Livro.QuantidadeDisponivel
                 },
-                NomeUsuario = emprestimoModel.NomeUsuario
+                Cliente = new
+                {
+                    ID = emprestimoModel.Cliente!.ClienteID,
+                    Nome = emprestimoModel.Cliente.Nome,
+                    Email = emprestimoModel.Cliente.Email,
+                    Telefone = emprestimoModel.Cliente.Telefone,
+                    Cpf = emprestimoModel.Cliente.Cpf
+                }
+                
             });
         }
 
@@ -84,7 +92,7 @@ namespace Biblioteca.API.Controllers
             model.DataDevolucaoPrevista = emprestimoModel.DataDevolucaoPrevista;
             model.BibliotecarioID = emprestimoModel.BibliotecarioID;
             model.LivroID = emprestimoModel.LivroID;
-            model.NomeUsuario = emprestimoModel.NomeUsuario;
+            model.ClienteID = emprestimoModel.ClienteID;
 
             context.Emprestimo!.Update(model);
             context.SaveChanges();

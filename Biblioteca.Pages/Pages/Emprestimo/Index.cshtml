@@ -14,7 +14,7 @@
                 <td scope="col">ID Empréstimo</td>
                 <td scope="col">Bibliotecário</td>
                 <td scope="col">Livro</td>
-                <td scope="col">Nome do Usuário</td>
+                <td scope="col">Nome do Cliente</td>
                 <td scope="col" data-type="date" data-format-string="DD/MMMM/YYYY">Data de Emprestimo</td>
                 <td scope="col">Data de Devolução</td>
                 <td scope="col"></td>
@@ -24,10 +24,10 @@
             @foreach (var emprestimoModel in Model.EmprestimoList)
             {
                 <tr>
-                    <td>@Html.DisplayFor(model => emprestimoModel.BibliotecarioID)</td>
+                    <td>@Html.DisplayFor(model => emprestimoModel.EmprestimoID)</td>
                     <td>@Html.DisplayFor(model => emprestimoModel.Bibliotecario!.Nome)</td>
-                    <td>@Html.DisplayFor(model => emprestimoModel.Livro!.ISBN)</td>   
-                    <td>@Html.DisplayFor(model => emprestimoModel.NomeUsuario)</td>
+                    <td>@Html.DisplayFor(model => emprestimoModel.Livro!.TituloLivro)</td>   
+                    <td>@Html.DisplayFor(model => emprestimoModel.Cliente!.Nome)</td>
                     <td>@Convert.ToDateTime(emprestimoModel.DataEmprestimo).ToString("dd/MM/yyyy")</td>
                     <td>@Convert.ToDateTime(emprestimoModel.DataDevolucaoPrevista).ToString("dd/MM/yyyy")</td>
                     <td>

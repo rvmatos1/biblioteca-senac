@@ -23,7 +23,10 @@ namespace Biblioteca.Pages.Models
         public int LivroID { get; set; } 
         public LivroModel? Livro { get; set; }
 
-        [Required(ErrorMessage = "Nome do Usuário é obrigatório!")]
-        public string? NomeUsuario { get; set; } 
+        [ForeignKey("Cliente")]
+        public int ClienteID { get; set; }
+        public ClienteModel? Cliente { get; set; }
+
+        public bool Ativo { get; set; }
     }
 }
