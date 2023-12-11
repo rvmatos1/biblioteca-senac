@@ -12,7 +12,7 @@ namespace Biblioteca.API.Controllers
         [HttpGet]
         [Route("/Emprestimo")]
         public IActionResult Get([FromServices] AppDbContext context){
-            var emprestimos = context.Emprestimo!.Include(b => b.Bibliotecario).Include(l => l.Livro).ToList();
+            var emprestimos = context.Emprestimo!.Where(x => x.Ativo).Include(b => b.Bibliotecario).Include(l => l.Livro).ToList();
             return Ok(emprestimos);
         }
 
@@ -54,8 +54,20 @@ namespace Biblioteca.API.Controllers
         public IActionResult Post([FromBody] EmprestimoModel emprestimoModel,
             [FromServices] AppDbContext context)
         {
-            context.Emprestimo!.Add(emprestimoModel);
-            context.SaveChanges();
+            if(emprestimoModel?.Livro?.QuantidadeDisponivel > 0)
+            {
+                emprestimoModel.Ativo = true;
+                emprestimoModel.Livro.QuantidadeDisponivel--;
+                context.Livro!.Update(emprestimoModel.Livro);
+
+                context.Emprestimo!.Add(emprestimoModel);
+                context.SaveChanges();
+            }
+            else
+            {
+                return BadRequest("Livro não disponível para empréstimo!");
+            }
+            
             return Created($"/{emprestimoModel.EmprestimoID}", emprestimoModel);
         }
 
@@ -89,7 +101,16 @@ namespace Biblioteca.API.Controllers
                 return NotFound();
             }
 
-            context.Emprestimo!.Remove(model);
+            var livro = context.Livro!.FirstOrDefault(x => x.LivroID == model.LivroID);
+            if(livro != null)
+            {
+                livro.QuantidadeDisponivel++;
+                context.Livro!.Update(livro);
+            }
+
+            model.Ativo = false;
+
+            context.Emprestimo!.Update(model);
             context.SaveChanges();
             return Ok(model);
         }

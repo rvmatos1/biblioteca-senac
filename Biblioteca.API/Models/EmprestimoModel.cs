@@ -25,5 +25,7 @@ namespace Biblioteca.API.Models
 
         [Required(ErrorMessage = "Nome do Usuário é obrigatório!")]
         public string? NomeUsuario { get; set; } 
+
+        public bool Ativo { get; set; }
     }
 }
