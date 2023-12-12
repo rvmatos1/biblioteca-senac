@@ -12,7 +12,7 @@ namespace Biblioteca.API.Controllers
         [Route("/Bibliotecario")]
         public IActionResult Get(
             [FromServices] AppDbContext context) => 
-                Ok( context.Bibliotecario!.ToList());
+                Ok( context.Bibliotecario!.Where(x => x.Ativo).ToList());
 
         
         [HttpGet("/Bibliotecario/Details/{id:int}")]
@@ -31,6 +31,7 @@ namespace Biblioteca.API.Controllers
         public IActionResult Post([FromBody] BibliotecarioModel bibliotecarioModel,
             [FromServices] AppDbContext context)
         {
+            bibliotecarioModel.Ativo = true;
             context.Bibliotecario!.Add(bibliotecarioModel);
             context.SaveChanges();
             return Created($"/{bibliotecarioModel.BibliotecarioID}", bibliotecarioModel);
@@ -65,7 +66,9 @@ namespace Biblioteca.API.Controllers
                 return NotFound();
             }
 
-            context.Bibliotecario!.Remove(model);
+            model.Ativo = false;
+
+            context.Bibliotecario!.Update(model);
             context.SaveChanges();
             return Ok(model);
         }

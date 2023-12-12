@@ -12,7 +12,7 @@ namespace Biblioteca.API.Controllers
         [Route("/Livro")]
         public IActionResult Get(
             [FromServices] AppDbContext context) => 
-                Ok( context.Livro!.ToList());
+                Ok( context.Livro!.Where(x => x.Ativo).ToList());
 
         
         [HttpGet("/Livro/Details/{id:int}")]
@@ -31,6 +31,7 @@ namespace Biblioteca.API.Controllers
         public IActionResult Post([FromBody] LivroModel livroModel,
             [FromServices] AppDbContext context)
         {
+            livroModel.Ativo = true;
             context.Livro!.Add(livroModel);
             context.SaveChanges();
             return Created($"/{livroModel.LivroID}", livroModel);
@@ -66,7 +67,8 @@ namespace Biblioteca.API.Controllers
                 return NotFound();
             }
 
-            context.Livro!.Remove(model);
+            model.Ativo = false;
+            context.Livro!.Update(model);
             context.SaveChanges();
             return Ok(model);
         }

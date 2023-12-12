@@ -12,6 +12,7 @@ namespace Biblioteca.Pages.Pages.Emprestimo
         public EmprestimoModel EmprestimoModel { get; set; } = new();
         public List<BibliotecarioModel> BibliotecarioList { get; set; } = new();
         public List<LivroModel> LivroList { get; set; } = new();
+        public List<ClienteModel> ClienteList { get; set; } = new();
         public Edit(){}
 
         public async Task<IActionResult> OnGetAsync(int? id){
@@ -46,6 +47,14 @@ namespace Biblioteca.Pages.Pages.Emprestimo
             var contentLivro = await responseLivro.Content.ReadAsStringAsync();
 
             LivroList = JsonConvert.DeserializeObject<List<LivroModel>>(contentLivro)!;
+
+            var httpClientCliente = new HttpClient();
+            var urlCliente = "http://localhost:5185/Cliente";
+            var requestMessageCliente = new HttpRequestMessage(HttpMethod.Get, urlCliente);
+            var responseCliente = await httpClientCliente.SendAsync(requestMessageCliente);
+            var contentCliente = await responseCliente.Content.ReadAsStringAsync();
+
+            LivroList = JsonConvert.DeserializeObject<List<LivroModel>>(contentCliente)!;
             return Page();
         }
 

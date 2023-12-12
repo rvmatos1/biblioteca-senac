@@ -1,12 +1,13 @@
 @page "{id:int}"
-@model Biblioteca.Pages.Pages.Bibliotecario.Details
+@model Biblioteca.Pages.Pages.Cliente.Details
 <link rel="stylesheet" href="~/lib/css/estilo.css"/>
-<h1>Detalhes do Bibliotecario: @Model.BibliotecarioModel.Nome</h1>
+<h1>Detalhes do Cliente: @Model.ClienteModel.Nome</h1>
 
 <div class="info">
-    <p><strong>Nome: </strong> @Model.BibliotecarioModel.Nome </p>
-    <p><strong>Sobrenome: </strong> @Model.BibliotecarioModel.Email </p>
-    <p><strong>Telefone: </strong> @Model.BibliotecarioModel.Telefone </p>
+    <p><strong>Nome: </strong> @Model.ClienteModel.Nome </p>
+    <p><strong>Sobrenome: </strong> @Model.ClienteModel.Email </p>
+    <p><strong>CPF: </strong> @Model.ClienteModel.Cpf </p>
+    <p><strong>Telefone: </strong> @Model.ClienteModel.Telefone </p>
 </div>
 
 <p style="text-align:center"><a class="btn btn-primary" role="button" asp-page="Index"> <strong>Voltar</strong></a></p>

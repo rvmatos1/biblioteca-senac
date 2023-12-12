@@ -8,7 +8,7 @@ namespace Biblioteca.API.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int LivroID { get; set; }
-        
+
         [Required(ErrorMessage = "Título do Livro é obrigatório!")]
         public string? TituloLivro { get; set; }
 
@@ -22,6 +22,9 @@ namespace Biblioteca.API.Models
         public int AnoPublicacao { get; set; }
 
         [Required(ErrorMessage = "Quantidade disponível é obrigatória!")]
-        public int QuantidadeDisponivel { get; set; } 
+        [Range(1, int.MaxValue, ErrorMessage = "O valor deve ser maior que 0.")]
+        public int QuantidadeDisponivel { get; set; }
+
+        public bool Ativo { get; set; }
     }
 }

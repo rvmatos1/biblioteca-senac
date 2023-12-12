@@ -12,14 +12,14 @@ namespace Biblioteca.API.Controllers
         [HttpGet]
         [Route("/Emprestimo")]
         public IActionResult Get([FromServices] AppDbContext context){
-            var emprestimos = context.Emprestimo!.Include(b => b.Bibliotecario).Include(l => l.Livro).ToList();
+            var emprestimos = context.Emprestimo!.Where(x => x.Ativo).Include(b => b.Bibliotecario).Include(c => c.Cliente).Include(l => l.Livro).ToList();
             return Ok(emprestimos);
         }
 
         [HttpGet("/Emprestimo/Details/{id:int}")]
         public IActionResult GetById([FromRoute] int id, [FromServices] AppDbContext context)
         {
-            var emprestimoModel = context.Emprestimo!.Include(b => b.Bibliotecario).Include(l => l.Livro).FirstOrDefault(x => x.EmprestimoID == id);
+            var emprestimoModel = context.Emprestimo!.Include(b => b.Bibliotecario).Include(l => l.Livro).Include(c => c.Cliente).FirstOrDefault(x => x.EmprestimoID == id);
             if (emprestimoModel == null)
             {
                 return NotFound();
@@ -46,7 +46,14 @@ namespace Biblioteca.API.Controllers
                     AnoPublicacao = emprestimoModel.Livro.AnoPublicacao,
                     QuantidadeDisponivel = emprestimoModel.Livro.QuantidadeDisponivel
                 },
-                NomeUsuario = emprestimoModel.NomeUsuario
+                Cliente = new
+                {
+                    ID = emprestimoModel.Cliente!.ClienteID,
+                    Nome = emprestimoModel.Cliente.Nome,
+                    Email = emprestimoModel.Cliente.Email,
+                    Telefone = emprestimoModel.Cliente.Telefone,
+                    Cpf = emprestimoModel.Cliente.Cpf
+                }                
             });
         }
 
@@ -54,8 +61,19 @@ namespace Biblioteca.API.Controllers
         public IActionResult Post([FromBody] EmprestimoModel emprestimoModel,
             [FromServices] AppDbContext context)
         {
+            var livro = context.Livro!.FirstOrDefault(x => x.LivroID == emprestimoModel.LivroID);
+
+            if (livro == null || livro?.QuantidadeDisponivel <= 0)
+            {
+                return NotFound("Livro não encontrado no acervo ou não disponível para empréstimo!");
+            }
+            livro.QuantidadeDisponivel--;
+            context.Livro!.Update(livro);
+
+            emprestimoModel.Ativo = true;
             context.Emprestimo!.Add(emprestimoModel);
             context.SaveChanges();
+            
             return Created($"/{emprestimoModel.EmprestimoID}", emprestimoModel);
         }
 
@@ -73,7 +91,7 @@ namespace Biblioteca.API.Controllers
             model.DataDevolucaoPrevista = emprestimoModel.DataDevolucaoPrevista;
             model.BibliotecarioID = emprestimoModel.BibliotecarioID;
             model.LivroID = emprestimoModel.LivroID;
-            model.NomeUsuario = emprestimoModel.NomeUsuario;
+            model.ClienteID = emprestimoModel.ClienteID;
 
             context.Emprestimo!.Update(model);
             context.SaveChanges();
@@ -89,7 +107,16 @@ namespace Biblioteca.API.Controllers
                 return NotFound();
             }
 
-            context.Emprestimo!.Remove(model);
+            var livro = context.Livro!.FirstOrDefault(x => x.LivroID == model.LivroID);
+            if(livro != null)
+            {
+                livro.QuantidadeDisponivel++;
+                context.Livro!.Update(livro);
+            }
+
+            model.Ativo = false;
+
+            context.Emprestimo!.Update(model);
             context.SaveChanges();
             return Ok(model);
         }

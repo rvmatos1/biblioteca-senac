@@ -7,6 +7,7 @@ namespace Biblioteca.API.Data
     {
 
         public DbSet<BibliotecarioModel>? Bibliotecario {get; set;}
+        public DbSet<ClienteModel>? Cliente { get; set; }
         public DbSet<EmprestimoModel>? Emprestimo {get; set;}
         public DbSet<LivroModel>? Livro {get; set;}
         protected override void OnConfiguring(DbContextOptionsBuilder options)
@@ -14,6 +15,7 @@ namespace Biblioteca.API.Data
             
         protected override void OnModelCreating(ModelBuilder modelBuilder){
             modelBuilder.Entity<BibliotecarioModel>().ToTable("Bibliotecario");
+            modelBuilder.Entity<ClienteModel>().ToTable("Cliente");
             modelBuilder.Entity<EmprestimoModel>().ToTable("Emprestimo");
             modelBuilder.Entity<LivroModel>().ToTable("Livro");
         }

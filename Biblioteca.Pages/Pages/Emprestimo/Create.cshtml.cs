@@ -1,10 +1,8 @@
-using System.Text;
-using System;
+using Biblioteca.Pages.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Newtonsoft.Json;
-using Biblioteca.Pages.Models;
-using System.Globalization;
+using System.Text;
 
 namespace Biblioteca.Pages.Pages.Emprestimo
 {
@@ -16,6 +14,7 @@ namespace Biblioteca.Pages.Pages.Emprestimo
         public string? DataPrevisaoDevolucao { get; set; }
         public List<BibliotecarioModel> BibliotecarioList { get; set; } = new();
         public List<LivroModel> LivroList { get; set; } = new();
+        public List<ClienteModel> ClienteList { get; set; } = new();
         public Create(){}
 
         public void setDate(){
@@ -43,6 +42,15 @@ namespace Biblioteca.Pages.Pages.Emprestimo
             var contentLivro = await responseLivro.Content.ReadAsStringAsync();
 
             LivroList = JsonConvert.DeserializeObject<List<LivroModel>>(contentLivro)!;
+
+            var httpClientCliente = new HttpClient();
+            var urlCliente = "http://localhost:5185/Cliente";
+            var requestMessageCliente = new HttpRequestMessage(HttpMethod.Get, urlCliente);
+            var responseCliente = await httpClientCliente.SendAsync(requestMessageCliente);
+            var contentCliente = await responseCliente.Content.ReadAsStringAsync();
+
+            ClienteList = JsonConvert.DeserializeObject<List<ClienteModel>>(contentCliente)!;
+
             setDate();
             return Page();
         }
